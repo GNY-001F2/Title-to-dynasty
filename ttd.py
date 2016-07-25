@@ -31,8 +31,8 @@ def process_prefix_file(source: str) -> list:
     # Now create a list with weighted occurences
     preflist_clean = []
     for prefsublist in preflist:
-        for i in range(0, int(prefsublist[2])):
-            preflist_clean.append(prefsublist[0:2])
+        for i in range(0, int(prefsublist[-1])):
+            preflist_clean.append(prefsublist[0:3])
     from random import shuffle
     shuffle(preflist_clean)
     return preflist_clean
@@ -43,12 +43,12 @@ def write_dynasties_to_file(target: str, dynlist: list, preflist: list,
     from random import choice
     with open(target, mode="w", encoding="cp1252") as openedtarget:
         for dynasty in dynlist:
-            (prefix, culture) = choice(preflist)[0:2]
+            (prefix, culture, gapv) = choice(preflist)[0:3]
             gap = " "
             if prefix == "~":
                 prefix = ""
                 gap = ""
-            elif prefix[-1] == "'":
+            elif gapv == "0":
                 gap = ""
             openedtarget.write(str(startvalue) + " = {\n    name = \"" +
                                prefix + gap + dynasty + "\"")
