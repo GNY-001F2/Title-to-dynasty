@@ -1,7 +1,5 @@
-from collections import Counter
-
-
 def process_localization_file(source: str) -> list:
+    from collections import Counter
     try:
         with open(source, encoding="cp1252") as openedsource:
             readsource = openedsource.readlines()
